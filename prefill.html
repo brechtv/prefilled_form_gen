@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat Reviews. Faster.</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <style type="text/css">
+    .hidden_first {
+    display: none;
+    }
+    iframe {
+    background-color: transparent;
+    border: 0px none transparent;
+    padding: 0px;
+    overflow: hidden;
+    }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+  </head>
+  <body  onbeforeunload='document.write("Refreshing ...");'>
+    <div class="container">
+      <div class="jumbotron jumbotron-fluid" style="height: 100px; background-color: white;">
+        <div class="container">
+          <h4 class="display-4">Faster Chat Reviews</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="cr_zd_url">Zendesk Ticket URL</label>
+          <input type="text" class="form-control" id="cr_zd_url" placeholder="https://looker.zendesk.com/agent/tickets/123456789" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="cr_reviewee">Reviewee</label>
+          <input type="text" class="form-control" id="cr_reviewee" placeholder="a valid Chatter name..." required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 mb-3">
+          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <select class="btn custom-select" id="cr_preset_val">
+              <option selected>Preset</option>
+              <option value="mentor_3s">Mentor - 3's</option>
+              <option value="p2p_3s">P2P - 3's</option>
+            </select>
+            <button type="button" class="btn btn-secondary" id="cr_generate">Generate</button>
+          </div>
+        </div>
+        <div class="col-md-9 mb-3 hidden_first">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="" aria-label="" id="cr_form_url">
+            <div class="input-group-btn">
+              <button type="button" id="copy" class="btn btn-outline-secondary" aria-haspopup="true" aria-expanded="false" data-clipboard-target="#cr_form_url">
+              Copy to clipboard
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <iframe id="form_frame" width="100%" height="600px" src=""></iframe>
+      </div>
+    </div>
+    <script src="script.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+    console.log(localStorage.getItem("cr_reviewee"))
+    // console.log(localStorage.getItem("cr_preset"))
+    $( "#cr_reviewee" ).val(localStorage.getItem("cr_reviewee"));
+    // $( "#cr_preset_val" ).val(localStorage.getItem("cr_preset"));
+    });
+    $( "#cr_generate" ).click(function() {
+    generateURL();
+    });
+    $(document).keypress(function(e) {
+      if(e.which == 13) {
+        generateURL();
+      }
+    });
+
+
+    new Clipboard('#copy');
+    </script>
+  </body>
+</html>
